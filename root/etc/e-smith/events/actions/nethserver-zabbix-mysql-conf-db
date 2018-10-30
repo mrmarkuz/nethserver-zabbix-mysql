@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# create and chown logfiles
+#touch /var/log/zabbix/zabbix_agentd.log
+#chown zabbix:zabbix /var/log/zabbix/zabbix_server.log /var/log/zabbix/zabbix_agentd.log
+
+# Create DB and user
+mysql -e "create database zabbix character set utf8 collate utf8_bin;"
+mysql -e "grant all privileges on zabbix.* to zabbix@localhost identified by '$(cat /var/lib/nethserver/secrets/zabbix)';"
+
+# Fill DB
+zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix
+
+# import map images of Andy Wismer
+#mv /root/zabbiximages /var/lib/pgsql/data/
+#cd /var/lib/pgsql/data/zabbiximages
+#for d in *.png; do su postgres -c "psql zabbix postgres -c \"insert into images (imageid,imagetype,name,image) values ((select max(imageid) +1 from images),1,'$d',pg_read_binary_file('zabbiximages/$d'));\""; done
+
+# rename backup monitoring script
+#mv /usr/local/bin/nethbackup_check /usr/local/bin/nethbackup_check.py

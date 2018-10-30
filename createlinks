@@ -1,0 +1,25 @@
+#!/usr/bin/perl
+
+use strict;
+use esmith::Build::CreateLinks qw(:all);
+
+#mandatory to create db after installation
+my $event = 'nethserver-zabbix-mysql-update';
+event_actions ($event,
+     'initialize-default-databases' => '00',
+     'nethserver-zabbix-mysql-conf' => '10',
+     'nethserver-zabbix-mysql-conf-db' => '90'
+);
+
+templates2events("/etc/httpd/conf.d/zabbix.conf", $event);
+templates2events("/etc/zabbix/zabbix_server.conf", $event);
+templates2events("/etc/zabbix/zabbix_agentd.conf", $event);
+templates2events("/etc/zabbix/web/zabbix.conf.php", $event);
+
+event_services($event,
+               'zabbix-server' => 'restart',
+               'zabbix-agent' => 'restart',
+               'httpd' => 'reload',
+);
+
+
