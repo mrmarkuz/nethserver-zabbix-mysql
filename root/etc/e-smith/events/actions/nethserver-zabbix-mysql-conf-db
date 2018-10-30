@@ -9,7 +9,7 @@ mysql -e "create database zabbix character set utf8 collate utf8_bin;"
 mysql -e "grant all privileges on zabbix.* to zabbix@localhost identified by '$(cat /var/lib/nethserver/secrets/zabbix)';"
 
 # Fill DB
-zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -uzabbix -p zabbix
+zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql zabbix
 
 # import map images of Andy Wismer
 #mv /root/zabbiximages /var/lib/pgsql/data/
