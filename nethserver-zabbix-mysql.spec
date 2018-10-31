@@ -37,7 +37,6 @@ rm -rf $RPM_BUILD_ROOT
 (cd root; find . -depth -print | cpio -dump $RPM_BUILD_ROOT)
 rm -f %{name}-%{version}-%{release}-filelist
 %{genfilelist} $RPM_BUILD_ROOT \
-  --dir /var/lib/nethserver/zabbix/backup 'attr(755, postgres, postgres)' \
 > %{name}-%{version}-%{release}-filelist
 
 %post
