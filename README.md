@@ -1,14 +1,10 @@
-# nethserver-zabbix
+# nethserver-zabbix-mysql
 
-nethserver-zabbix integrates the newest Zabbix monitoring system from Zabbix repo to NethServer
+nethserver-zabbix-mysql integrates the newest Zabbix monitoring system from Zabbix repo to NethServer
 
-## Installation
+## Installation on ARM
 
-Install Zabbix repo:
-
-rpm -ivh http://repo.zabbix.com/zabbix/3.4/rhel/7/x86_64/zabbix-release-3.4-2.el7.noarch.rpm
-
-Install nethserver-zabbix, browse to /zabbix and install zabbix via web.
+yum install --enablerepo=nethserver-testing,epel-pass1 https://mrmarkuz.goip.de/mirror/devtest/nethserver-zabbix-mysql-0.0.1-1.ns7.noarch.rpm
 
 The Zabbix db user password is stored in /var/lib/nethserver/secrets/zabbix
 
@@ -18,4 +14,5 @@ https://community.nethserver.org/t/howto-install-zabbix-3-4/7841
 
 ## ToDo
 
-Basic Nethgui setup
+Integrate pictures
+Integrate backup script
